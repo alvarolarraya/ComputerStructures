@@ -1,0 +1,13 @@
+Laboratorio EECC
+
+Computadora de Escritorio: plataforma sistema xubuntu de 64 bits/ S.O GNU/ kernel linux/ CPU intel core x86-64
+
+Programas a desarrollar: compilar para CPU X86 de 32 bits
+
+Libro de texto practicas -> programming from the ground up. Tiene el codigo fuente ASM para x86-32
+
+Lenguajes ASM para intel hay varios: GNU assembly language -> gas
+
+Guion de practicas -> apuntes miaulario
+
+Mirar si tienes comando as y ld

@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
+<meta name="keywords" content="computer, architecture" />
+<title>Estructura de Computadores  (240306): Prácticas_ARM</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306): Prácticas_ARM</h1>
+<span id="author">Cándido Aramburu</span><br />
+<span id="email"><code>&lt;<a href="mailto:candido@unavarra.es">candido@unavarra.es</a>&gt;</code></span><br />
+<span id="revnumber">version 0.6.0,</span>
+<span id="revdate">2019-10-23</span>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduccion">1. Introducción</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+La arquitectura de una computadora se puede clasificar en dos grandes grupos: la arquitectura <strong>CISC</strong> y la arquitectura <strong>RISC</strong>. Un ejemplo de la arquitectura CISC son los microprocesadores con arquitectura x86 y x86-64 como son los procesadores de Intel en computadoras de sobremesa y servidores. Un ejemplo de la arquitectura RISC son los microprocesadores ARM en computadores portátiles como la telefonía móvil, tablet, etc &#8230; y los sistemas empotrados como la automoción, instrumentación médica, etc donde el coste y consumo energético juegan un papel prioritario.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kit_de_evaluacion_terasic_de1_soc">2. Kit de Evaluación: Terasic DE1-SoC</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+La tarjeta de evaluación Terasic DE1-SoC está basada en un chip de Silicio System On Chip (SoC) el cual integra dos componentes básicos:
+</p>
+</li>
+<li>
+<p>
+un módulo de lógica programable FPGA (Field Logic Gate Array) de la familia Cyclone V modelo 5CSEMA5F31C6N
+</p>
+</li>
+<li>
+<p>
+un procesador (Hard Processor System HPS) con dos núcleos ARM Cortex A9
+ La tarjeta de evaluación dispone además del chip SoC de una gran variedad de periféricos para interactuar con el mundo exterior como son:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+LEDS
+</p>
+</li>
+<li>
+<p>
+conmutadores
+</p>
+</li>
+<li>
+<p>
+botones
+</p>
+</li>
+<li>
+<p>
+displays de 7 segmentos
+</p>
+</li>
+<li>
+<p>
+Comunicaciones: ethernet, usb, &#8230;
+</p>
+</li>
+<li>
+<p>
+multimedia: audio, video vga
+</p>
+</li>
+<li>
+<p>
+lector para tarjetas microSD
+</p>
+</li>
+<li>
+<p>
+otros
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_acceso_a_las_computadoras_terasic">3. Acceso a las computadoras Terasic</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Mediante un navegador instalado en la computadora del alumno se puede acceder desde el campus de la Upna a través de la red intranet a la computadora Terasic DE1-SoC instalada en el laboratorio con las credenciales:
+</p>
+</li>
+<li>
+<p>
+la URL : <em>http://weblab-cpl.unavarra.es:8080/guacamole</em>
+</p>
+</li>
+<li>
+<p>
+usuario: <em>student</em>
+</p>
+</li>
+<li>
+<p>
+password: <em>upna</em>
+</p>
+</li>
+<li>
+<p>
+password: <em>student</em>
+</p>
+</li>
+<li>
+<p>
+Abriéndose sesión en la consola con el prompt del shell de linux: <em>student@de1-soc1:~$</em>
+</p>
+</li>
+<li>
+<p>
+Cambiar de directorio yendo a la carpeta de trabajo : <em>~/assembly/upna</em>
+</p>
+</li>
+<li>
+<p>
+Para salir de la consola ejecutar dos veces: <code>exit</code>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_programacion_basica">4. Programación básica</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_modulos_fuente">4.1. Módulos fuente</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Colección de Módulos fuente:
+</p>
+</li>
+<li>
+<p>
+<em>hello_world.s</em>
+</p>
+</li>
+<li>
+<p>
+<em>sum1toN.s</em>
+</p>
+</li>
+<li>
+<p>
+<em>maximum.s</em>
+</p>
+</li>
+<li>
+<p>
+<em>power.s</em>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_isa_arquitectura_armv7_de_32_bits">4.2. ISA: arquitectura ARMv7 de 32 bits</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+El procesador ARM Cortex-A9 esta diseñado para ejecutar el repertorio de instrucciones con arquitectura ARMv7 de 32 bits cuyas características más importantes son:
+</p>
+</li>
+<li>
+<p>
+tamaño del formato de instrucciones uniforme: 32 bits
+</p>
+</li>
+<li>
+<p>
+alineamiento en memoria de las instrucciones en direcciones múltiplo de 4 bits.
+</p>
+</li>
+<li>
+<p>
+para acceder a posiciones de la memoria principal es necesario emplear instrucciones load/store (mnemónicos LDR/SDR) mediante direccionamiento a memoria: directo, indirecto, indirecto con desplazamiento.
+</p>
+</li>
+<li>
+<p>
+Excepto las instrucciones load/store el resto de instrucciones hacen referencia a los operandos mediante los tipos de direccionamiento: inmediato y registro.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_assembler">4.3. Assembler</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Comentarios: se puede utilizar las marcas <em>/* comentario */</em>  ó  @
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_toolchain">4.4. Toolchain</h3>
+<div class="sect3">
+<h4 id="_herramientas">4.4.1. herramientas</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Dado que se va a trabajar en una computadora con un procesador con la arquitectura ARM es necesario tener instaladas las herramientas de compilación, ensamblaje, linkaje, depurador, etc &#8230; para dicha arquitectura
+</p>
+</li>
+<li>
+<p>
+Herramientas en cadena para la compilación y análisis de programación de bajo nivel
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+colección de compiladores GNU: <strong>gcc</strong>
+</p>
+</li>
+<li>
+<p>
+ensamblador: <strong>as</strong>
+</p>
+</li>
+<li>
+<p>
+linker: <strong>ld</strong>
+</p>
+</li>
+<li>
+<p>
+depurador: <strong>gdb</strong>
+</p>
+</li>
+<li>
+<p>
+volcado de la memoria: <strong>objdump</strong>
+</p>
+</li>
+<li>
+<p>
+analizador del módulo binario ejecutable: <strong>readelf</strong>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_compilacion">4.4.2. compilación</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+gcc   -g -nostdlib   -o  modulo  modulo.s
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+modulo: nombre del fichero a compilar
+</p>
+</li>
+<li>
+<p>
+-g : opción de depuración
+</p>
+</li>
+<li>
+<p>
+-nostdlib : no se utilizan al linkar las librerías standard de inicialización. Equivale a -nostartfiles
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+gcc   -g -nostartfiles   -o  modulo  modulo.s
+</p>
+</li>
+<li>
+<p>
+gcc   -g -nostartfiles -mcpu=cortex-a9 -march=armv7-a  -o  modulo modulo.s
+</p>
+</li>
+<li>
+<p>
+as -gstabs -o modulo.o modulo.s
+</p>
+</li>
+<li>
+<p>
+as -mcpu=cortex-a9 -march=armv7-a  -gstabs -o modulo.o modulo.s
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+se indica explicitamente la arquitectura del módulo objeto ejecutable de salida:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+procesador físico cortex-a9 y arquitectura isa del repertorio de instrucciones : armv7-a
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+ld -o modulo modulo.o
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+objdump -i : lista las arquitecturas de salida posibles
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vim_editor">5. Vim editor</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_basico">5.1. básico</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/">https://www.thegeekdiary.com/basic-vi-commands-cheat-sheet/</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+vi hello_world.s
+</p>
+</li>
+<li>
+<p>
+al entrar en vi el editor está en modo <strong>vi</strong>
+</p>
+</li>
+<li>
+<p>
+con una de las órdenes i,I,a,A,o,O se pasa al modo INSERT
+</p>
+</li>
+<li>
+<p>
+con la orden : se sale del modo INSERT al modo COMANDO
+</p>
+</li>
+<li>
+<p>
+en el modo comando
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+con la orden w salva lo editado
+</p>
+</li>
+<li>
+<p>
+con la orden wq se salva y se sale
+</p>
+</li>
+<li>
+<p>
+con la orden q se sale
+</p>
+</li>
+<li>
+<p>
+con la orden q! se sale sin salvar
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_modo_comando">5.2. modo comando</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+buscar &#8594;  /
+</p>
+</li>
+<li>
+<p>
+buscar y reemplazar &#8594;  :%s:item_busqueda:item_reemplazo
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_refs">6. Refs</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/ARM-Options.html#ARM-Options:">assembler as ARM dependent options</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hello_world_s">7. hello_world.s</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+módulo fuente <em>hello_world.s</em>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"> Programa en lenguaje ensamblador AT&amp;T para el procesador ARM</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900"> Programa fuente: hello_world.s</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> Compiler:        gcc -g -nostdlib -o hello_world hello_world.s</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> Assembler:       as -o hello_world.o hello_world.s</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> Linker:          ld -o hello_world hello_world.o</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+        <span style="color: #990000">.</span>data
+
+<span style="font-weight: bold"><span style="color: #008080">        msg:</span></span>
+        <span style="color: #990000">.</span>ascii <span style="color: #FF0000">"Hello, ARM World!</span><span style="color: #CC33CC">\n</span><span style="color: #FF0000">"</span>
+        len <span style="color: #990000">=</span> <span style="color: #990000">.</span> <span style="color: #990000">-</span> msg
+
+
+        <span style="color: #990000">.</span>text
+
+        <span style="color: #990000">.</span>globl _start
+_start<span style="color: #990000">:</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/* write syscall */</span></span>
+        <span style="color: #008080">mov</span> r0<span style="color: #990000">,</span> $<span style="color: #993399">1</span>
+        <span style="color: #008080">ldr</span> r1<span style="color: #990000">,</span> <span style="color: #990000">=</span>msg
+        <span style="color: #008080">ldr</span> r2<span style="color: #990000">,</span> <span style="color: #990000">=</span>len
+        <span style="color: #008080">mov</span> r7<span style="color: #990000">,</span> $<span style="color: #993399">4</span>
+        swi $<span style="color: #993399">0</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/* exit syscall */</span></span>
+        <span style="color: #008080">mov</span> r0<span style="color: #990000">,</span> $<span style="color: #993399">0</span>
+        <span style="color: #008080">mov</span> r7<span style="color: #990000">,</span> $<span style="color: #993399">1</span>
+        swi $<span style="color: #993399">0</span></tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sum1ton_s">8. sum1toN.s</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+módulo fuente <em>sum1toN.s</em>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">/*      Programa: sum1toN.s</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Descripción: realiza la suma de la serie 1,2,3,...N</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Es el programa en lenguaje ARM equivalente a sum1toN.ias de la máquina IAS de von Neumann</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        gcc  -g -nostartfiles -o sum1toN sum1toN.s</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        linker -&gt; ld     -o sum1toN sum1toN.o</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+        @  Declaración de variables
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>data
+n<span style="color: #990000">:</span>      <span style="color: #990000">.</span><span style="color: #009900">int</span> <span style="color: #993399">5</span>
+
+        <span style="color: #990000">.</span>global _start
+
+        @ Comienzo del código
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>text
+_start<span style="color: #990000">:</span>
+        <span style="color: #008080">mov</span> r0<span style="color: #990000">,</span>#<span style="color: #993399">0</span>       @ R0 implementa la variable suma
+        <span style="color: #008080">ldr</span> r2<span style="color: #990000">,=</span>n       @ R1 implementa la variable n indirectamente
+        <span style="color: #008080">ldr</span> r1<span style="color: #990000">,[</span>r2<span style="color: #990000">]</span>
+<span style="font-style: italic"><span style="color: #9A1900">/* Direccionamiento directo:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        mov r1,n da error porque mov no admite direccionamiento a memoria directo.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                 mov admite direccionamiento inmediato si el literal de  32 bits no tiene repetición de ceros a izda y dcha</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                 para convertirlo en un literal de 8 bits seguido de desplazamientos</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        ldr r1,n Error: reubicación_interna (tipo OFFSET_IMM) no compuesta</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                 Da error al intentar codificar un literal (dirección n) de 32 bits.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+
+<span style="font-weight: bold"><span style="color: #008080">bucle:</span></span>
+        <span style="color: #008080">add</span> r0<span style="color: #990000">,</span>r1
+        <span style="color: #008080">subs</span>  r1<span style="color: #990000">,</span>#<span style="color: #993399">1</span>
+        bne bucle
+
+        @r0 es el argumento de salida <span style="color: #008080">al</span> S<span style="color: #990000">.</span>O<span style="color: #990000">.</span> a través de EBX según convenio
+
+        <span style="font-style: italic"><span style="color: #9A1900">/* exit syscall */</span></span>
+        <span style="color: #008080">mov</span> r7<span style="color: #990000">,</span> #<span style="color: #993399">1</span>
+        swi #<span style="color: #993399">0</span>
+
+        <span style="color: #990000">.</span>end
+</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maximum_s">9. maximum.s</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+módulo fuente <em>maximum.s</em>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Algoritmo: búsqueda del valor máximo de una lista de números enteros</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Resutado: echo $?</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Variables del algoritmo: Implementadas en los siguientes registros:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        r3 - Guarda la dirección del primer elemento de la lista</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        r2 - Guarda el índice del siguiente número de la lista a analizar</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        r1 - Número presente a analizar</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        r0 - Máximo valor encontrado hasta el presente</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        r7 - Código de la llamada al sistema</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>data
+data_items<span style="color: #990000">:</span>
+        <span style="color: #990000">.</span><span style="color: #009900">int</span> <span style="color: #993399">3</span><span style="color: #990000">,</span><span style="color: #993399">67</span><span style="color: #990000">,</span><span style="color: #993399">34</span><span style="color: #990000">,</span><span style="color: #993399">222</span><span style="color: #990000">,</span><span style="color: #993399">45</span><span style="color: #990000">,</span><span style="color: #993399">75</span><span style="color: #990000">,</span><span style="color: #993399">54</span><span style="color: #990000">,</span><span style="color: #993399">34</span><span style="color: #990000">,</span><span style="color: #993399">44</span><span style="color: #990000">,</span><span style="color: #993399">33</span><span style="color: #990000">,</span><span style="color: #993399">22</span><span style="color: #990000">,</span><span style="color: #993399">11</span><span style="color: #990000">,</span><span style="color: #993399">66</span><span style="color: #990000">,</span><span style="color: #993399">0</span> @ Lista de números enteros con signo
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>text
+        <span style="color: #990000">.</span>globl _start
+_start<span style="color: #990000">:</span>
+        <span style="color: #008080">ldr</span>   r3<span style="color: #990000">,=</span>data_items    @ registro base
+        <span style="color: #008080">ldr</span>   r1<span style="color: #990000">,</span> <span style="color: #990000">[</span>r3<span style="color: #990000">]</span>          @ cargar el <span style="color: #993399">1</span>º elemento de la lista
+        <span style="color: #008080">mov</span>   r0<span style="color: #990000">,</span>r1             @ valor máximo inicial
+        <span style="color: #008080">mov</span>   r2<span style="color: #990000">,</span>#<span style="color: #993399">1</span>             @ índice al segundo elemento de la lista
+start_loop<span style="color: #990000">:</span>                     @ start loop
+        <span style="color: #008080">cmp</span>   r1<span style="color: #990000">,</span>#<span style="color: #993399">0</span>             @ chequear si es el valor marca de fin de lista
+        <span style="color: #008080">beq</span>    loop_exit                @ ir a la salida si elemento marca final
+        <span style="color: #008080">ldr</span>   r1<span style="color: #990000">,</span> <span style="color: #990000">[</span>r3<span style="color: #990000">,</span> <span style="color: #990000">+</span>r2<span style="color: #990000">,</span> LSL #<span style="color: #993399">2</span><span style="color: #990000">]!</span>    @ siguiente valor a analizar
+                                @ desplazamiento <span style="color: #008080">con</span> post<span style="color: #990000">-</span>actualización de r3
+                                @ <span style="color: #008080">base</span> r3<span style="color: #990000">,</span>í<span style="color: #008080">ndice</span> r2<span style="color: #990000">,</span> escala <span style="color: #993399">4</span> <span style="font-weight: bold"><span style="color: #000000">bytes</span></span> <span style="color: #990000">(</span>tamaño dato de <span style="color: #008080">la</span> lista<span style="color: #990000">)</span>
+        <span style="color: #008080">cmp</span>   r1<span style="color: #990000">,</span>r0             @ comparación entre el máximo presente y elemento presente
+        <span style="color: #008080">ble</span>   start_loop        @ siguiente elemento de la lista
+
+        <span style="color: #008080">mov</span>   r0<span style="color: #990000">,</span>r1             @ encontrada un nuevo máximo
+        <span style="color: #008080">bal</span>    start_loop       @ siguiente elemento de la lista
+loop_exit<span style="color: #990000">:</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/* exit syscall */</span></span>
+        <span style="color: #008080">mov</span> r7<span style="color: #990000">,</span> #<span style="color: #993399">1</span>
+        swi #<span style="color: #993399">0</span>
+</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_power_s">10. power.s</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+módulo fuente <em>power.s</em>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        PURPOSE: Program to illustrate how functions work</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        This program will compute the value of  x elevado a y</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        OUTPUT : echo $?</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        Registros:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                r13: puntero de pila</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">        DE</span></span><span style="font-weight: bold"><span style="background-color: #66FFFF">BUG</span></span><span style="font-style: italic"><span style="color: #9A1900">GER COMMANDS</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        (gdb) x /a (char **)($esp+8) -&gt; doble puntero ya que esp+8 es un puntero que apunta a un string. string es un puntero a         caracter</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        0xffffd078:     0xffffd2a7   ---------&gt; 0xfffd078 es la dirección de la pila. Es un puntero. Apunta a  los strings de la               línea de comandos</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        0xffffd2a7 es el puntero al string del 2º argumento.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        (gdb) x /c *(char **)($esp+8) -&gt; Dereferencio el primer puntero obtengo la dirección del string y x examina esa dirección</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        con formato caracter,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        0xffffd2a7:     50 '2'</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        (gdb) x /s *(char **)($esp+8)  -&gt; Dereferencio el primer puntero obtengo la dirección del string y x examina esa dirección</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        con formato string</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        0xffffd2a7:      "2"</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+
+      <span style="color: #990000">.</span>section <span style="color: #990000">.</span>data
+      <span style="color: #990000">.</span>section <span style="color: #990000">.</span>text
+      <span style="color: #990000">.</span>globl _start
+_start<span style="color: #990000">:</span>
+
+        @ string argument pointers
+        <span style="color: #008080">ldr</span> r2<span style="color: #990000">,[</span>r13<span style="color: #990000">,</span> #<span style="color: #990000">+</span><span style="color: #993399">8</span><span style="color: #990000">]</span>      @ r0 tiene el contendio de <span style="color: #008080">la</span> pila<span style="color: #990000">=</span> dirección <span style="color: #008080">del</span> string<span style="color: #990000">.</span> argv<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+        <span style="color: #008080">ldr</span> r3<span style="color: #990000">,[</span>r13<span style="color: #990000">,</span> #<span style="color: #990000">+</span><span style="color: #993399">12</span><span style="color: #990000">]</span>     @ r1 tiene el contendio de <span style="color: #008080">la</span> pila<span style="color: #990000">=</span> dirección <span style="color: #008080">del</span> string<span style="color: #990000">.</span> argv<span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span>
+        @ fetch string indirect
+        <span style="color: #008080">ldr</span> r0<span style="color: #990000">,[</span>r2<span style="color: #990000">]</span>        @ indirección para acceder al string referenciado <span style="color: #008080">por</span> argv<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+        <span style="color: #008080">ldr</span> r1<span style="color: #990000">,[</span>r3<span style="color: #990000">]</span>        @<span style="color: #990000">/</span>g indirección para acceder al string referenciado <span style="color: #008080">por</span> argv<span style="color: #990000">[</span><span style="color: #993399">1</span><span style="color: #990000">]</span>
+        @ pongo a cero los dos bytes mas significativos del ASCII de <span style="color: #993399">4</span> bytes
+        <span style="color: #008080">mov</span> r0<span style="color: #990000">,</span>r0<span style="color: #990000">,</span>LSL #<span style="color: #993399">16</span>
+        <span style="color: #008080">mov</span> r0<span style="color: #990000">,</span>r0<span style="color: #990000">,</span>LSR #<span style="color: #993399">16</span>
+        <span style="color: #008080">mov</span> r1<span style="color: #990000">,</span>r1<span style="color: #990000">,</span>LSL #<span style="color: #993399">16</span>
+        <span style="color: #008080">mov</span> r1<span style="color: #990000">,</span>r1<span style="color: #990000">,</span>LSR #<span style="color: #993399">16</span>
+        @ convert ascii numbers to values
+        <span style="color: #008080">sub</span> r0<span style="color: #990000">,</span>#<span style="color: #993399">0x30</span>
+        <span style="color: #008080">sub</span> r1<span style="color: #990000">,</span>#<span style="color: #993399">0x30</span>
+        <span style="color: #008080">bl</span>  power           @ call    the function
+
+        <span style="font-style: italic"><span style="color: #9A1900">/* exit syscall */</span></span>
+
+        <span style="color: #008080">mov</span> r7<span style="color: #990000">,</span> #<span style="color: #993399">1</span>
+        swi #<span style="color: #993399">0</span>
+
+<span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #PURPOSE: This function is used to compute the value of a number raised to a power.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #INPUT:        First argument - the base number</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #              Second argument - the power to raise it to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #OUTPUT:       Will give the result as a return value</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #NOTES:        The power must be 1 or greater</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #VARIABLES:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #              r0 - holds the base number and the return value</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #              r1 - holds the power</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #              r2 - multiplicación parcial</span></span>
+<span style="font-style: italic"><span style="color: #9A1900"> #</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">*/</span></span>
+
+<span style="font-weight: bold"><span style="color: #008080">power:</span></span>
+        <span style="color: #008080">mov</span>     r2<span style="color: #990000">,</span>r0           @ inicializo el resultado parcial con la base
+power_loop_start<span style="color: #990000">:</span>
+        <span style="color: #008080">cmp</span>     r1<span style="color: #990000">,</span>#<span style="color: #993399">1</span>           @ si la potencia ha llegado a <span style="color: #993399">1</span> <span style="color: #990000">,</span> fin <span style="color: #008080">de</span> bucle<span style="color: #990000">.</span>
+        <span style="color: #008080">beq</span>     end_power
+        <span style="color: #008080">mul</span>     r2<span style="color: #990000">,</span>r2<span style="color: #990000">,</span>r0        @ multiplico la base r0 por el temporal r2
+        <span style="color: #008080">sub</span>     r1<span style="color: #990000">,</span>r1<span style="color: #990000">,</span>#<span style="color: #993399">1</span>        @ decrease the power
+        <span style="color: #008080">bal</span>     power_loop_start @ siguiente factor
+end_power<span style="color: #990000">:</span>
+        <span style="color: #008080">mov</span>     r0<span style="color: #990000">,</span>r2           @ valor de retorno en r0
+        bx lr
+<span style="color: #990000">.</span>end</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version 0.6.0<br />
+Last updated
+ 2019-10-21 18:09:52 CEST
+</div>
+</div>
+</body>
+</html>

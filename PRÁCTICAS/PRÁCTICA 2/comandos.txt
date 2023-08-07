@@ -1,0 +1,51 @@
++b _start
+Punto de interrupción 1 at 0x175: file datos_size.s, line 22.
++x /tb &da1
+0x2000:	00001010
++x /xb &da2
+0x2001:	0x0b
++x /xh &da2
+0x2001:	0x0a0b
++x /2xh &da2
+0x2001:	0x0a0b	0x0c0d
++x /2xb &da2
+0x2001:	0x0b	0x0a
++x /5xb &da4
+0x2003:	0x0d	0x0c	0x0b	0x0a	0x68
++x /xw &da4
+0x2003:	0x0a0b0c0d
++x /5cb &men1
+0x2007:	104 'h'	111 'o'	108 'l'	97 'a'	1 '\001'
++x /5xb &men1
+0x2007:	0x68	0x6f	0x6c	0x61	0x01
++p /s (char*)&men1
+$1 = 0x2007 "hola\001"
++x /5xw &lista
+0x200b:	0x00000001	0x00000002	0x00000003	0x00000004
+0x201b:	0x00000005
++p /a &lista
+$2 = 0x200b
++p /a &lista+1
+Cannot perform pointer math on incomplete type "<data variable, no debug info>", try casting to a known type, or void *.
++p /a (void*)&lista+1
+$3 = 0x200c
++p /a (int*)&lista+1
+$4 = 0x200f
++p lista
+'lista' has unknown type; cast it to its declared type
++p (int)lista
+$5 = 1
++p (int*)&lista
+$6 = (int *) 0x200b
++p (int [5])lista
+$7 = {1, 2, 3, 4, 5}
++p*((int*)&lista+1)
+$8 = 2
++x /dw (int*)&lista+1
+0x200f:	2
++p*(int*)&lista@5
+$9 = {1, 2, 3, 4, 5}
++p &_start
+$10 = (<text variable, no debug info> *) 0x175 <_start>
++x /i &_start
+   0x175 <_start>:	mov    $0x1,%eax

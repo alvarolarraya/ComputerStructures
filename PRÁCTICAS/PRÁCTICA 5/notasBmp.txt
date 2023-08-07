@@ -1,0 +1,13 @@
+p /a &mem[i][j].r		#para mirar la direccion del array mem
+p /x &reg mem[64][64].r - &reg mem[0][0].r		#para mirar la posicion del array en funcion de la posicion de otro (cuantos bytes los separa)
+p /1xb mem[64][64]		#saca el valor del byte en la posicion 64,64 del array mem
+backtrace 		#te saca los frame que hay
+finish			#cuando hacemos step, para terminar la funcion
+ptype buffer		#saca la estructura del struct buffer
+x /3xb &buffer[64][64]+1		#saca la direccion de memoria del siguiente elemento del array buffer
+p /x *(buffer[64][64]+1)		#saca el elemento del buffer [64][65]
+x *3xb (char*) &buffer			#saca un byte del primer elemento del buffer
+x /3xb (char*) &buffer+(64*512+64)*3
+p /a (char*) &buffer+(64*512+64)*3		#la direccion anterior
+p /x *((char*) &buffer+(64*512+64)*3)
+p /x ((char*) &buffer+(64*512+64)*3+1)	#saca la direccion del elemento anterior más un byte
